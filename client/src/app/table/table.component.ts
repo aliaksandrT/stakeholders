@@ -40,7 +40,12 @@ export class TableComponent implements OnInit {
   private getShareholders() {
     this.server.getShareholders().then((response: any) => {
       console.log('Response', response);
-      this.shareholders = response;
+      const totalstocksCount = response.reduce((counter: number, shareholder: any) => counter += shareholder.stocksCount, 0);
+      this.shareholders = response.map((shareholder: any) => {
+        shareholder.stocksRelativeCount = Math.round(shareholder.stocksCount / totalstocksCount * 10000) / 100;
+
+        return shareholder;
+      });
     });
   }
 
