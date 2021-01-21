@@ -3,10 +3,10 @@ const express = require('express');
 function createRouter(db) {
   const router = express.Router();
 
-  router.post('/sholder', (req, res, next) => {
+  router.post('/shareholder', (req, res, next) => {
     db.query(
-      'INSERT INTO stakeholders (name, stockscount, stockstype) VALUES (?,?,?)',
-      [req.body.name, req.body.stockscount, req.body.stockstype],
+      'INSERT INTO stakeholders (name, stocksCount, stocksType) VALUES (?,?,?)',
+      [req.body.name, req.body.stocksCount, req.body.stocksType],
       (error) => {
         if (error) {
           console.error(error);
@@ -18,10 +18,10 @@ function createRouter(db) {
     );
   });
 
-  router.put('/sholder/:id', function (req, res, next) {
+  router.put('/shareholder/:id', function (req, res, next) {
     db.query(
-      'UPDATE stakeholders SET name=?, stockscount=?, stockstype=? WHERE id=?',
-      [req.body.name, req.body.stockscount, req.body.stockstype, req.params.id],
+      'UPDATE stakeholders SET name=?, stocksCount=?, stocksType=? WHERE id=?',
+      [req.body.name, req.body.stocksCount, req.body.stocksType, req.params.id],
       (error) => {
         if (error) {
           res.status(500).json({status: 'error'});
@@ -32,7 +32,7 @@ function createRouter(db) {
     );
   });
 
-  router.delete('/sholder/:id', function (req, res, next) {
+  router.delete('/shareholder/:id', function (req, res, next) {
     db.query(
       'DELETE FROM stakeholders WHERE id=?',
       [req.params.id],
@@ -46,9 +46,9 @@ function createRouter(db) {
     );
   });
 
-  router.get('/sholders', function (req, res, next) {
+  router.get('/shareholders', function (req, res, next) {
     db.query(
-      'SELECT id, name, stockscount, stockstype FROM stakeholders LIMIT 10 OFFSET ?',
+      'SELECT id, name, stocksCount, stocksType FROM stakeholders LIMIT 10 OFFSET ?',
       [10*(req.params.page || 0)],
       (error, results) => {
         if (error) {

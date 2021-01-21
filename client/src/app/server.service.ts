@@ -22,19 +22,19 @@ export class ServerService {
       });
     }
 
-    getSholders() {
-      return this.request('GET', `${environment.serverUrl}/sholders`);
+    getShareholders() {
+      return this.request('GET', `${environment.serverUrl}/shareholders`);
     }
 
-    createSholder(sholder: any) {
-      return this.request('POST', `${environment.serverUrl}/sholder`, sholder);
+    createShareholder(shareholder: any) {
+      return this.request('POST', `${environment.serverUrl}/shareholder`, shareholder);
     }
 
-    updateSholder(sholder: any) {
-      return this.request('PUT', `${environment.serverUrl}/sholder/${sholder.id}`, sholder);
+    updateShareholder(shareholder: any) {
+      return this.request('PUT', `${environment.serverUrl}/shareholder/${shareholder.id}`, shareholder);
     }
 
-    deleteSholder(sholder: any) {
-      return this.request('DELETE', `${environment.serverUrl}/sholder/${sholder.id}`);
+    deleteShareholder(shareholder: any) {
+      return this.request('DELETE', `${environment.serverUrl}/shareholder/${shareholder.id}`);
     }
 }

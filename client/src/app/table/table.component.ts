@@ -1,6 +1,6 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { FormGroup, FormBuilder, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ServerService } from '../server.service';
 
 @Component({
@@ -12,8 +12,8 @@ export class TableComponent implements OnInit {
   form!: FormGroup;
   modalRef!: BsModalRef;
 
-  sholders: any[] = [];
-  currentSholder: any = {id: null, name: '', stockscount: 0, stockstype: ''};
+  shareholders: any[] = [];
+  currentShareholder: any = {id: null, name: '', stocksCount: 0, stocksType: ''};
   modalCallback!: () => void;
 
   constructor(private fb: FormBuilder,
@@ -22,75 +22,70 @@ export class TableComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
-      name: [this.currentSholder.name, Validators.required],
-      stockscount: [this.currentSholder.stockscount, Validators.required],
-      stockstype: [this.currentSholder.stockstype, Validators.required],
+      name: [this.currentShareholder.name, Validators.required],
+      stocksCount: [this.currentShareholder.stocksCount, Validators.required],
+      stocksType: [this.currentShareholder.stocksType, Validators.required],
     });
-    this.getSholders();
+    this.getShareholders();
   }
 
   private updateForm() {
     this.form.setValue({
-      name: this.currentSholder.name,
-      stockscount: this.currentSholder.stockscount,
-      stockstype: this.currentSholder.stockstype,
+      name: this.currentShareholder.name,
+      stocksCount: this.currentShareholder.stocksCount,
+      stocksType: this.currentShareholder.stocksType,
     });
   }
 
-  private getSholders() {
-    this.server.getSholders().then((response: any) => {
+  private getShareholders() {
+    this.server.getShareholders().then((response: any) => {
       console.log('Response', response);
-      this.sholders = response.map((sholder: any) => {
-        sholder.body = sholder.stockscount;
-        sholder.header = sholder.name;
-        sholder.icon = 'fa-clock-o';
-        return sholder;
-      });
+      this.shareholders = response;
     });
   }
 
-  addSholder(template: any) {
-    this.currentSholder = {id: null, name: '', stockscount: '', stockstype: ''};
+  addShareholder(template: any) {
+    this.currentShareholder = {id: null, name: '', stocksCount: '', stocksType: ''};
     this.updateForm();
-    this.modalCallback = this.createSholder.bind(this);
+    this.modalCallback = this.createShareholder.bind(this);
     this.modalRef = this.modalService.show(template);
   }
 
-  createSholder() {
-    const newSholder = {
+  createShareholder() {
+    const newShareholder = {
       name: this.form.get('name')?.value || '',
-      stockscount: this.form.get('stockscount')?.value || 0,
-      stockstype: this.form.get('stockstype')?.value || '',
+      stocksCount: this.form.get('stocksCount')?.value || 0,
+      stocksType: this.form.get('stocksType')?.value || '',
     };
     this.modalRef.hide();
-    this.server.createSholder(newSholder).then(() => {
-      this.getSholders();
+    this.server.createShareholder(newShareholder).then(() => {
+      this.getShareholders();
     });
   }
 
-  editSholder(index: any, template: any) {
-    this.currentSholder = this.sholders[index];
+  editShareholder(index: any, template: any) {
+    this.currentShareholder = this.shareholders[index];
     this.updateForm();
-    this.modalCallback = this.updateSholder.bind(this);
+    this.modalCallback = this.updateShareholder.bind(this);
     this.modalRef = this.modalService.show(template);
   }
 
-  updateSholder() {
+  updateShareholder() {
     const eventData = {
-      id: this.currentSholder.id,
+      id: this.currentShareholder.id,
       name: this.form.get('name')?.value || '',
-      stockscount: this.form.get('stockscount')?.value || 0,
-      stockstype: this.form.get('stockstype')?.value || '',
+      stocksCount: this.form.get('stocksCount')?.value || 0,
+      stocksType: this.form.get('stocksType')?.value || '',
     };
     this.modalRef.hide();
-    this.server.updateSholder(eventData).then(() => {
-      this.getSholders();
+    this.server.updateShareholder(eventData).then(() => {
+      this.getShareholders();
     });
   }
 
-  deleteSholder(index: any) {
-    this.server.deleteSholder(this.sholders[index]).then(() => {
-      this.getSholders();
+  deleteShareholder(index: any) {
+    this.server.deleteShareholder(this.shareholders[index]).then(() => {
+      this.getShareholders();
     });
   }
 

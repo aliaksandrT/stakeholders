@@ -1,17 +1,6 @@
 <div class="container page-content">
     <div class="row">
       <div class="col-sm-12 col-md">
-
-        <!-- <ngx-timeline [sholders]="sholders">
-          <ng-template let-sholder let-index="rowIndex" timelineBody>
-            <div>{{sholder.body}}</div>
-            <div class="button-row">
-              <button type="button" class="btn btn-primary" (click)="editSholder(index, sholdermodal)"><i class="fa fa-edit"></i></button>
-              <button type="button" class="btn btn-danger" (click)="deleteSholder(index)"><i class="fa fa-trash"></i></button>
-            </div>
-          </ng-template>
-        </ngx-timeline> -->
-
         <table class="table table-striped">
             <thead>
             <tr>
@@ -23,17 +12,17 @@
             </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let sholder of sholders; index as i">
+                <tr *ngFor="let shareholder of shareholders; index as i">
                     <th scope="row">{{ i + 1 }}</th>
                     <td>
-                        {{ sholder.name }}
+                        {{ shareholder.name }}
                     </td>
-                    <td>{{ sholder.stockscount }}</td>
-                    <td>{{ sholder.stockstype }}</td>
+                    <td>{{ shareholder.stocksCount }}</td>
+                    <td>{{ shareholder.stocksType }}</td>
                     <td>
                         <div class="button-row">
-                            <button type="button" class="btn btn-primary" (click)="editSholder(i, sholdermodal)"><i class="fa fa-edit"></i></button>
-                            <button type="button" class="btn btn-danger" (click)="deleteSholder(i)"><i class="fa fa-trash"></i></button>
+                            <button type="button" class="btn btn-primary" (click)="editShareholder(i, shareholdermodal)"><i class="fa fa-edit"></i></button>
+                            <button type="button" class="btn btn-danger" (click)="deleteShareholder(i)"><i class="fa fa-trash"></i></button>
                         </div>
                     </td>
                 </tr>
@@ -41,12 +30,12 @@
         </table>
       </div>
       <div class="col-md-2">
-        <button type="button" class="btn btn-primary" (click)="addSholder(sholdermodal)"><i class="fa fa-plus"></i> Add</button>
+        <button type="button" class="btn btn-primary" (click)="addShareholder(shareholdermodal)"><i class="fa fa-plus"></i> Add</button>
       </div>
     </div>
   </div>
 
-  <ng-template #sholdermodal>
+  <ng-template #shareholdermodal>
     <div class="modal-header">
       <h4 class="modal-title pull-left">Add stakeholder</h4>
       <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
@@ -57,15 +46,15 @@
       <form [formGroup]="form" (ngSubmit)="modalCallback()">
         <div class="form-group full-width-input">
           <label>Name</label>
-          <input class="form-control" placeholder="Sholder Name" formControlName="name" required>
+          <input class="form-control" placeholder="Shareholder Name" formControlName="name" required>
         </div>
         <div class="form-group full-width-input">
           <label>Stock count</label>
-          <input class="form-control" formControlName="stockscount">
+          <input class="form-control" formControlName="stocksCount">
         </div>
         <div class="form-group full-width-input">
           <label>Stock type</label>
-          <input class="form-control" placeholder="Stock type" formControlName="stockstype" required>
+          <input class="form-control" placeholder="Stock type" formControlName="stocksType" required>
         </div>
         <div class="button-row">
           <button type="button" class="btn btn-primary" (click)="modalCallback()">Submit</button>
