@@ -3,29 +3,32 @@
     <div class="col-sm-12 col-md">
       <table class="table table-striped">
           <thead>
-          <tr>
-            <th class="text-center" scope="col">#</th>
-            <th class="text-center" scope="col">Name</th>
-            <th class="text-center" scope="col">Stock count</th>
-            <th class="text-center" scope="col">Stock relative count</th>
-            <th class="text-center" scope="col">Stock type</th>
-            <th scope="col"></th>
-          </tr>
+            <tr>
+              <th class="text-center" scope="col">#</th>
+              <th class="text-center" scope="col">Name</th>
+              <th class="text-center" scope="col">Stock count</th>
+              <th class="text-center" scope="col">Stock relative count</th>
+              <th class="text-center" scope="col">Stock type</th>
+              <th class="text-center" scope="col">Actions</th>
+            </tr>
           </thead>
           <tbody>
-              <tr *ngFor="let shareholder of shareholders; index as i">
-                  <th scope="row" class="text-center">{{ i + 1 }}</th>
-                  <td class="text-center">{{ shareholder.name }}</td>
-                  <td class="text-center">{{ shareholder.stocksCount }}</td>
-                  <td class="text-center">{{ shareholder.stocksRelativeCount }}%</td>
-                  <td class="text-center">{{ shareholder.stocksType }}</td>
-                  <td>
-                      <div class="button-row">
-                          <button type="button" class="btn btn-primary" (click)="editShareholder(i, shareholdermodal)"><i class="fa fa-edit"></i></button>
-                          <button type="button" class="btn btn-danger" (click)="deleteShareholder(i)"><i class="fa fa-trash"></i></button>
-                      </div>
-                  </td>
-              </tr>
+            <tr *ngFor="let shareholder of shareholders; index as i">
+              <th scope="row" class="text-center">{{ i + 1 }}</th>
+              <td class="text-center">{{ shareholder.name }}</td>
+              <td class="text-center">{{ shareholder.stocksCount }}</td>
+              <td class="text-center">{{ shareholder.stocksRelativeCount }}%</td>
+              <td class="text-center">{{ shareholder.stocksType }}</td>
+              <td>
+                <div class="button-row">
+                  <button type="button" class="btn btn-primary" (click)="editShareholder(i, shareholdermodal)"><i class="fa fa-edit"></i></button>
+                  <button type="button" class="btn btn-danger" (click)="deleteShareholder(i)"><i class="fa fa-trash"></i></button>
+                </div>
+              </td>
+            </tr>
+            <tr *ngIf="!shareholders.length">
+              <td class="text-center" colspan='6'>No shareholders in the base at the moment, please add some</td>
+            </tr>
           </tbody>
       </table>
     </div>
@@ -43,7 +46,7 @@
 
 <ng-template #shareholdermodal>
   <div class="modal-header">
-    <h4 class="modal-title pull-left">Add stakeholder</h4>
+    <h4 class="modal-title pull-left">Add shareholder</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>

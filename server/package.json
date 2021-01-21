@@ -1,9 +1,10 @@
 {
-  "name": "stakeholders_server",
+  "name": "shareholders_server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
