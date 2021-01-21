@@ -2,8 +2,15 @@
     margin-top: 2rem;
 }
 
+.multiplier {
+    margin-bottom: 5px;
+}
+
 .button-row {
     display: flex;
     justify-content: space-between;
-    margin-top: 1rem;
+}
+
+.text-center {
+    vertical-align: middle;
 }

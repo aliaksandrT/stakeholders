@@ -1,73 +1,71 @@
 <div class="container page-content">
-    <div class="row">
-      <div class="col-sm-12 col-md">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Name</th>
-              <th scope="col">Stock count</th>
-              <th scope="col">Stock relative count</th>
-              <th scope="col">Stock type</th>
-              <th scope="col"></th>
-            </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let shareholder of shareholders; index as i">
-                    <th scope="row">{{ i + 1 }}</th>
-                    <td>
-                        {{ shareholder.name }}
-                    </td>
-                    <td>{{ shareholder.stocksCount }}</td>
-                    <td>{{ shareholder.stocksRelativeCount }}%</td>
-                    <td>{{ shareholder.stocksType }}</td>
-                    <td>
-                        <div class="button-row">
-                            <button type="button" class="btn btn-primary" (click)="editShareholder(i, shareholdermodal)"><i class="fa fa-edit"></i></button>
-                            <button type="button" class="btn btn-danger" (click)="deleteShareholder(i)"><i class="fa fa-trash"></i></button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+  <div class="row">
+    <div class="col-sm-12 col-md">
+      <table class="table table-striped">
+          <thead>
+          <tr>
+            <th class="text-center" scope="col">#</th>
+            <th class="text-center" scope="col">Name</th>
+            <th class="text-center" scope="col">Stock count</th>
+            <th class="text-center" scope="col">Stock relative count</th>
+            <th class="text-center" scope="col">Stock type</th>
+            <th scope="col"></th>
+          </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let shareholder of shareholders; index as i">
+                  <th scope="row" class="text-center">{{ i + 1 }}</th>
+                  <td class="text-center">{{ shareholder.name }}</td>
+                  <td class="text-center">{{ shareholder.stocksCount }}</td>
+                  <td class="text-center">{{ shareholder.stocksRelativeCount }}%</td>
+                  <td class="text-center">{{ shareholder.stocksType }}</td>
+                  <td>
+                      <div class="button-row">
+                          <button type="button" class="btn btn-primary" (click)="editShareholder(i, shareholdermodal)"><i class="fa fa-edit"></i></button>
+                          <button type="button" class="btn btn-danger" (click)="deleteShareholder(i)"><i class="fa fa-trash"></i></button>
+                      </div>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+    </div>
+    <div class="col-md-2">
+      <div class="row h-50 justify-content-center align-items-center">
+        <button type="button" class="btn btn-primary" (click)="addShareholder(shareholdermodal)"><i class="fa fa-plus"></i> Add shareholder</button>
       </div>
-      <div class="col-md-2">
-        <div class="row h-50 justify-content-center align-items-center">
-          <button type="button" class="btn btn-primary" (click)="addShareholder(shareholdermodal)"><i class="fa fa-plus"></i> Add shareholder</button>
-        </div>
-        <div class="row justify-content-center">
-          <button type="button" class="btn btn-primary multiplier" (click)="splitShares(multiplier)" formtarget="_blank"><i class="fa fa-angle-double-up"></i> Split shares</button>
-          <input type="text" [(ngModel)]="multiplier" placeholder="Enter multiplier">
-        </div>
+      <div class="row justify-content-center">
+        <button type="button" class="btn btn-primary multiplier" (click)="splitShares(multiplier)" formtarget="_blank"><i class="fa fa-angle-double-up"></i> Split shares</button>
+        <input type="text" [(ngModel)]="multiplier" placeholder="Enter multiplier">
       </div>
     </div>
   </div>
+</div>
 
-  <ng-template #shareholdermodal>
-    <div class="modal-header">
-      <h4 class="modal-title pull-left">Add stakeholder</h4>
-      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <form [formGroup]="form" (ngSubmit)="modalCallback()">
-        <div class="form-group full-width-input">
-          <label>Name</label>
-          <input class="form-control" placeholder="Shareholder Name" formControlName="name" required>
-        </div>
-        <div class="form-group full-width-input">
-          <label>Stock count</label>
-          <input class="form-control" formControlName="stocksCount">
-        </div>
-        <div class="form-group full-width-input">
-          <label>Stock type</label>
-          <input class="form-control" placeholder="Stock type" formControlName="stocksType" required>
-        </div>
-        <div class="button-row">
-          <button type="button" class="btn btn-primary" (click)="modalCallback()">Submit</button>
-          <button type="button" class="btn btn-light" (click)="onCancel()">Cancel</button>
-        </div>
-      </form>
-    </div>
-  </ng-template>
+<ng-template #shareholdermodal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Add stakeholder</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="form" (ngSubmit)="modalCallback()">
+      <div class="form-group full-width-input">
+        <label>Name</label>
+        <input class="form-control" placeholder="Shareholder Name" formControlName="name" required>
+      </div>
+      <div class="form-group full-width-input">
+        <label>Stock count</label>
+        <input class="form-control" formControlName="stocksCount">
+      </div>
+      <div class="form-group full-width-input">
+        <label>Stock type</label>
+        <input class="form-control" placeholder="Stock type" formControlName="stocksType" required>
+      </div>
+      <div class="button-row">
+        <button type="button" class="btn btn-primary" (click)="modalCallback()">Submit</button>
+        <button type="button" class="btn btn-light" (click)="onCancel()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
