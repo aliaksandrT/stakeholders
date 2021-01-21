@@ -5,7 +5,7 @@ function createRouter(db) {
 
   router.post('/sholder', (req, res, next) => {
     db.query(
-      'INSERT INTO sholders (name, stockscount, stockstype) VALUES (?,?,?)',
+      'INSERT INTO stakeholders (name, stockscount, stockstype) VALUES (?,?,?)',
       [req.body.name, req.body.stockscount, req.body.stockstype],
       (error) => {
         if (error) {
@@ -20,8 +20,8 @@ function createRouter(db) {
 
   router.put('/sholder/:id', function (req, res, next) {
     db.query(
-      'UPDATE sholders SET name=?, stockscount=?, stockstype=? WHERE id=?',
-      [req.body.name, req.body.stockscount, req.body.stockscount, req.params.id],
+      'UPDATE stakeholders SET name=?, stockscount=?, stockstype=? WHERE id=?',
+      [req.body.name, req.body.stockscount, req.body.stockstype, req.params.id],
       (error) => {
         if (error) {
           res.status(500).json({status: 'error'});
@@ -34,7 +34,7 @@ function createRouter(db) {
 
   router.delete('/sholder/:id', function (req, res, next) {
     db.query(
-      'DELETE FROM sholders WHERE id=?',
+      'DELETE FROM stakeholders WHERE id=?',
       [req.params.id],
       (error) => {
         if (error) {
@@ -48,8 +48,8 @@ function createRouter(db) {
 
   router.get('/sholders', function (req, res, next) {
     db.query(
-      'SELECT id, name, stockscount, stockstype FROM sholders LIMIT 10 OFFSET ?',
-      [name, 10*(req.params.page || 0)],
+      'SELECT id, name, stockscount, stockstype FROM stakeholders LIMIT 10 OFFSET ?',
+      [10*(req.params.page || 0)],
       (error, results) => {
         if (error) {
           console.log(error);
