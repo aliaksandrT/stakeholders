@@ -11,6 +11,7 @@ import { ServerService } from '../server.service';
 export class TableComponent implements OnInit {
   form!: FormGroup;
   modalRef!: BsModalRef;
+  multiplier: string = '';
 
   shareholders: any[] = [];
   currentShareholder: any = {id: null, name: '', stocksCount: 0, stocksType: ''};
@@ -54,6 +55,13 @@ export class TableComponent implements OnInit {
     this.updateForm();
     this.modalCallback = this.createShareholder.bind(this);
     this.modalRef = this.modalService.show(template);
+  }
+
+  splitShares(multiplier: any) {
+    const factor = +multiplier || 1;
+    this.server.splitShares(factor).then(() => {
+      this.getShareholders();
+    });
   }
 
   createShareholder() {

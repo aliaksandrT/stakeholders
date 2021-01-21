@@ -18,6 +18,21 @@ function createRouter(db) {
     );
   });
 
+  router.post('/splitshares', (req, res, next) => {
+    db.query(
+      'UPDATE stakeholders SET stocksCount=stocksCount*?',
+      [req.body.multiplier],
+      (error) => {
+        if (error) {
+          console.error(error);
+          res.status(500).json({status: 'error'});
+        } else {
+          res.status(200).json({status: 'ok'});
+        }
+      }
+    );
+  });
+
   router.put('/shareholder/:id', function (req, res, next) {
     db.query(
       'UPDATE stakeholders SET name=?, stocksCount=?, stocksType=? WHERE id=?',

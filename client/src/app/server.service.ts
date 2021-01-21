@@ -37,4 +37,8 @@ export class ServerService {
     deleteShareholder(shareholder: any) {
       return this.request('DELETE', `${environment.serverUrl}/shareholder/${shareholder.id}`);
     }
+
+    splitShares(multiplier: number) {
+      return this.request('POST', `${environment.serverUrl}/splitshares`, { multiplier });
+    }
 }

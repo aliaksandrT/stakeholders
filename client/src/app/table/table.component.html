@@ -32,7 +32,13 @@
         </table>
       </div>
       <div class="col-md-2">
-        <button type="button" class="btn btn-primary" (click)="addShareholder(shareholdermodal)"><i class="fa fa-plus"></i> Add</button>
+        <div class="row h-50 justify-content-center align-items-center">
+          <button type="button" class="btn btn-primary" (click)="addShareholder(shareholdermodal)"><i class="fa fa-plus"></i> Add shareholder</button>
+        </div>
+        <div class="row justify-content-center">
+          <button type="button" class="btn btn-primary multiplier" (click)="splitShares(multiplier)" formtarget="_blank"><i class="fa fa-angle-double-up"></i> Split shares</button>
+          <input type="text" [(ngModel)]="multiplier" placeholder="Enter multiplier">
+        </div>
       </div>
     </div>
   </div>
