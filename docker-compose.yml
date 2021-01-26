@@ -23,3 +23,15 @@ services:
     depends_on:
       - db
     restart: on-failure
+  client:
+    build: ./client
+    environment:
+      <<: *common-variables
+    expose:
+      - 4200
+    ports:
+      - 4200:80
+    depends_on:
+      - db
+      - server
+    restart: on-failure

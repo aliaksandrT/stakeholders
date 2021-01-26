@@ -16,9 +16,4 @@ server_1  |
 server_1  | Express server listening on port 8080
 server_1  | connected as id 2
 ```
-3) open the 'client' directory and run next commands:
-```
-$ npm install
-$ npm run start
-``` 
-4) and finally open the http://localhost:4200 page to open the application
+3) and then open the http://localhost:4200 page to open the application
