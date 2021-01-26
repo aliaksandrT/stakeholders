@@ -5,7 +5,7 @@ const express = require('express');
 const connection = require('./config/db');
 const shareholdersRoutes = require('./shareholders.routes');
 
-const port = process.env.PORT || 8080;
+const port = process.env.SERVER_PORT || 8080;
 
 const app = express()
   .use(cors())

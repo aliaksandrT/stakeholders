@@ -1,35 +1,24 @@
 Prerequisitions:
-node, angular/cli, mysql
+node, angular/cli, docker
 
 To run the demo do these steps first:
 
-1) Install mysql and run it:
-```mysql -u root -p```
-2) create database:
+1) Open the project folder and run:
+```docker-compose up --build```
+2) wait for the next messages in the console:
 ```
-$ create database shareholders;
-$ use shareholders;
+db_1      | 2021-01-25T23:55:22.380359Z 0 [Note] mysqld: ready for connections.
+db_1      | Version: '5.7.33'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server (GPL)
+server_1  | 
+server_1  | > shareholders_server@1.0.0 start /usr/src/app
+server_1  | > node src/index.js
+server_1  | 
+server_1  | Express server listening on port 8080
+server_1  | connected as id 2
 ```
-3) create user and grand him permissions:
-```
-$ create user 'shareholderUser1'@'localhost' identified by 'password';
-$ grant all on shareholders.* to 'shareholderUser1'@'localhost';
-$ ALTER USER 'shareholderUser1'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
-```
-4) create table:
-```
-create table shareholdersTable (
-  id INT AUTO_INCREMENT,
-  name VARCHAR(255) NOT NULL,
-  stocksCount FLOAT NOT NULL,
-  stocksType VARCHAR(255) NOT NULL,
-  PRIMARY KEY (id),
-  INDEX (name)
-);
-```
-5) open the 'client' and 'server' directories and run next commands in both of them:
+3) open the 'client' directory and run next commands:
 ```
 $ npm install
 $ npm run start
 ``` 
-6) and finally open the http://localhost:4200 page to open the application
+4) and finally open the http://localhost:4200 page to open the application
